@@ -31,11 +31,15 @@ android {
 ext {
     appSupportLibVersion = '26.0.1'
     daggerVersion = '2.11'
+    retrofitVersion = '2.3.0'
 }
 
 dependencies {
     compile "com.android.support:appcompat-v7:${appSupportLibVersion}"
     compile "com.android.support:design:${appSupportLibVersion}"
     compile "com.google.dagger:dagger:${daggerVersion}"
+    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    compile "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
 }
