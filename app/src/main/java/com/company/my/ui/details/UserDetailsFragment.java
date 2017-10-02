@@ -96,7 +96,8 @@ public class UserDetailsFragment extends BaseFragment<UserDetailsPresenter, Frag
         if (mUser != null) {
             Intent emailIntent = new Intent(Intent.ACTION_VIEW);
             emailIntent.setData(Uri.parse(String.format(getString(R.string.mailto), mUser.getEmail())));
-            getActivity().startActivityForResult(Intent.createChooser(emailIntent, getString(R.string.send_email_title)), 1);
+
+            startImplicitIntent(emailIntent);
         }
     }
 
@@ -104,7 +105,16 @@ public class UserDetailsFragment extends BaseFragment<UserDetailsPresenter, Frag
         if (mUser != null) {
             Intent callIntent = new Intent(Intent.ACTION_DIAL);
             callIntent.setData(Uri.parse(String.format(getString(R.string.tel), mUser.getPhone())));
-            startActivity(callIntent);
+
+            startImplicitIntent(callIntent);
+        }
+    }
+
+    private void startImplicitIntent(Intent intent) {
+        if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+            startActivity(intent);
+        } else {
+            showToast(getString(R.string.error_intent));
         }
     }
 }
