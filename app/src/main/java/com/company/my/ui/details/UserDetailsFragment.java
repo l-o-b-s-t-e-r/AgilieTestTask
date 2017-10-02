@@ -48,33 +48,15 @@ public class UserDetailsFragment extends BaseFragment<UserDetailsPresenter, Frag
             presenter.getUser(getArguments().getLong(USER_ID));
         }
 
-        binding.email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mUser != null) {
-                    Intent emailIntent = new Intent(Intent.ACTION_VIEW);
-                    emailIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    emailIntent.setData(Uri.parse(String.format(getString(R.string.mailto), mUser.getEmail())));
-                    startActivity(Intent.createChooser(emailIntent, getString(R.string.send_email_title)));
-                }
-            }
-        });
-        binding.phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (mUser != null) {
-                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                    callIntent.setData(Uri.parse(String.format(getString(R.string.tel), mUser.getPhone())));
-                    startActivity(callIntent);
-                }
-            }
-        });
+        binding.email.setOnClickListener(view1 -> sendEmail());
+        binding.phone.setOnClickListener(view2 -> makeCall());
     }
 
     @Override
     public void showUserDetails(User user) {
         mUser = user;
 
+        binding.info.setVisibility(View.VISIBLE);
         binding.name.setText(user.getName());
         binding.email.setText(user.getEmail());
         binding.phone.setText(user.getPhone());
@@ -107,6 +89,22 @@ public class UserDetailsFragment extends BaseFragment<UserDetailsPresenter, Frag
             Marker marker = mMap.addMarker(markerOptions);
             marker.setTitle(mUser.getAddress().getStreet());
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 12));
+        }
+    }
+
+    private void sendEmail() {
+        if (mUser != null) {
+            Intent emailIntent = new Intent(Intent.ACTION_VIEW);
+            emailIntent.setData(Uri.parse(String.format(getString(R.string.mailto), mUser.getEmail())));
+            getActivity().startActivityForResult(Intent.createChooser(emailIntent, getString(R.string.send_email_title)), 1);
+        }
+    }
+
+    private void makeCall() {
+        if (mUser != null) {
+            Intent callIntent = new Intent(Intent.ACTION_DIAL);
+            callIntent.setData(Uri.parse(String.format(getString(R.string.tel), mUser.getPhone())));
+            startActivity(callIntent);
         }
     }
 }

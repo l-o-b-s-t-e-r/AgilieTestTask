@@ -42,13 +42,23 @@ public class MainActivity extends AppCompatActivity implements UsersFragment.OnF
             mFragmentManager.beginTransaction()
                     .add(R.id.users_fragment, UsersFragment.newInstance())
                     .commit();
+        } else {
+            if (fragment instanceof UserDetailsFragment) {
+                mFragmentManager.popBackStack();
+            }
         }
 
         if (findViewById(R.id.user_details_fragment) != null) {
             mFragmentManager.beginTransaction()
-                    .addToBackStack(null)
                     .add(R.id.user_details_fragment, mUserDetailsFragment = UserDetailsFragment.newInstance(savedInstanceState))
                     .commit();
+        } else {
+            Fragment userDetailsFragment = mFragmentManager.findFragmentById(R.id.user_details_fragment);
+            if (userDetailsFragment != null) {
+                mFragmentManager.beginTransaction()
+                        .remove(userDetailsFragment)
+                        .commit();
+            }
         }
     }
 
@@ -90,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements UsersFragment.OnF
             outState.putLong(USER_ID, mSelectedUser.getId());
         }
 
-        mFragmentManager.popBackStack();
         super.onSaveInstanceState(outState);
     }
 }

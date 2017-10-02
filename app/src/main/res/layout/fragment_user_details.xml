@@ -25,9 +25,11 @@
             android:textSize="20sp" />
 
         <LinearLayout
+            android:id="@+id/info"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:visibility="invisible"
             android:weightSum="2">
 
             <WebView
