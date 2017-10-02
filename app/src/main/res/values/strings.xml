@@ -7,7 +7,7 @@
     <string name="avatar_url">http://avatars.io/twitter/%d</string>
     <string name="toolbar_title_users">Users</string>
     <string name="title_activity_maps">Map</string>
-    <string name="https">https://%s</string>
+    <string name="https">http://%s</string>
     <string name="send_email_title">Send email</string>
     <string name="mailto">mailto:%s</string>
     <string name="tel">tel:%s</string>

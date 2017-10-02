@@ -6,6 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.company.my.R;
 import com.company.my.app.App;
@@ -50,6 +53,12 @@ public class UserDetailsFragment extends BaseFragment<UserDetailsPresenter, Frag
 
         binding.email.setOnClickListener(view1 -> sendEmail());
         binding.phone.setOnClickListener(view2 -> makeCall());
+        binding.web.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return true;
+            }
+        });
     }
 
     @Override
