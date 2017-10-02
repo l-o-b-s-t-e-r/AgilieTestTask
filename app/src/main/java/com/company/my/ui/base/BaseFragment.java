@@ -28,9 +28,9 @@ public abstract class BaseFragment<T extends IBasePresenter.Actions, E extends V
 
     private Realm mRealm;
 
-    abstract public void inject();
-
     abstract public int layoutId();
+
+    abstract public void inject();
 
     @Override
     public void onAttach(Context context) {
@@ -55,21 +55,16 @@ public abstract class BaseFragment<T extends IBasePresenter.Actions, E extends V
     }
 
     @Override
-    public void showProgress() {
-
+    public void printError(Throwable throwable) {
+        throwable.printStackTrace();
     }
 
     @Override
-    public void hideProgress() {
-
-    }
-
-    @Override
-    public void onDestroy() {
+    public void onDetach() {
+        super.onDetach();
+        presenter.clear();
         if (mRealm != null && !mRealm.isClosed()) {
             mRealm.close();
         }
-
-        super.onDestroy();
     }
 }

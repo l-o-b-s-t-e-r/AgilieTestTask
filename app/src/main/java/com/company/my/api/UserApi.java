@@ -1,6 +1,10 @@
 package com.company.my.api;
 
-import io.reactivex.Observable;
+import com.company.my.model.entity.User;
+
+import java.util.List;
+
+import io.reactivex.Single;
 import retrofit2.http.GET;
 
 /**
@@ -10,6 +14,6 @@ import retrofit2.http.GET;
 public interface UserApi {
 
     @GET("users")
-    Observable<Object> loadUsers();
+    Single<List<User>> loadUsers();
 
 }

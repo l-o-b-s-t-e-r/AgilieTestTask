@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">My</string>
+    <string name="app_name">Agilie</string>
+    <string name="error_caching">An error occurred while caching data.</string>
+    <string name="error_empty_cache">There is no cached data.</string>
+    <string name="error_network">An error occurred while loading data from the server.</string>
+    <string name="avatar_url">http://avatars.io/twitter/%d</string>
+    <string name="toolbar_title_users">Users</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="https">https://%s</string>
+    <string name="send_email_title">Send email</string>
+    <string name="mailto">mailto:%s</string>
+    <string name="tel">tel:%s</string>
 </resources>

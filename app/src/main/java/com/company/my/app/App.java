@@ -39,4 +39,5 @@ public class App extends Application {
         component = DaggerAppComponent.builder()
                 .build();
     }
+
 }

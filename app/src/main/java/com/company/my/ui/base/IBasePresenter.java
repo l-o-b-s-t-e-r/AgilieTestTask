@@ -12,15 +12,15 @@ public interface IBasePresenter {
 
         void setRealm(Realm realm);
 
+        void clear();
+
     }
 
     interface View {
 
-        void showProgress();
-
-        void hideProgress();
-
         void showToast(String message);
+
+        void printError(Throwable throwable);
 
     }
 

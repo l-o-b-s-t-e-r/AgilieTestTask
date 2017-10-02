@@ -1,6 +1,5 @@
 package com.company.my.app.di;
 
-import com.company.my.api.AvatarApi;
 import com.company.my.api.UserApi;
 import com.company.my.model.manager.DataManager;
 import com.company.my.model.manager.IDataManager;
@@ -19,7 +18,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    public IDataManager provideDataManager(UserApi userApi, AvatarApi avatarApi) {
-        return new DataManager(userApi, avatarApi);
+    public IDataManager provideDataManager(UserApi userApi) {
+        return new DataManager(userApi);
     }
 }
