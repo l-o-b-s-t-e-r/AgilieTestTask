@@ -38,23 +38,34 @@ public class MainActivity extends AppCompatActivity implements UsersFragment.OnF
 
         mFragmentManager = getSupportFragmentManager();
         Fragment fragment = mFragmentManager.findFragmentById(R.id.users_fragment);
+
+        //Check if fragment has already been added
         if (fragment == null) {
             mFragmentManager.beginTransaction()
                     .add(R.id.users_fragment, UsersFragment.newInstance())
                     .commit();
         } else {
+            //Check if this fragment is UserDetails fragment
+            //It happens when rotation(portrait -> landscape) occured from UserDetails screen
             if (fragment instanceof UserDetailsFragment) {
+                //Pop it from the back stack to show UsersList fragment
                 mFragmentManager.popBackStack();
             }
         }
 
+        //Check if activity contains "users_details_fragment" container
+        //true - landscape mode
+        //false - portrait mode
         if (findViewById(R.id.user_details_fragment) != null) {
             mFragmentManager.beginTransaction()
                     .add(R.id.user_details_fragment, mUserDetailsFragment = UserDetailsFragment.newInstance(savedInstanceState))
                     .commit();
         } else {
+            //Check if Fragment Manager contains UserDetails fragment
+            //true - rotation occured from landscape to portrait
             Fragment userDetailsFragment = mFragmentManager.findFragmentById(R.id.user_details_fragment);
-            if (userDetailsFragment != null) {
+            if (userDetailsFragment != null && userDetailsFragment instanceof UserDetailsFragment) {
+                //Remove fragment, because it's no longer needed
                 mFragmentManager.beginTransaction()
                         .remove(userDetailsFragment)
                         .commit();
