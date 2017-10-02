@@ -36,7 +36,7 @@ public class DataManager implements IDataManager {
 
     @Override
     public List<User> getUsers(Realm realm) {
-        return realm.where(User.class).findAll();
+        return realm.where(User.class).findAllSorted("name");
     }
 
     @Override

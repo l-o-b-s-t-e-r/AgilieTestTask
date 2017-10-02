@@ -42,12 +42,7 @@ public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdap
         User user = mItems.get(position);
         ItemUserBinding binding = DataBindingUtil.bind(holder.getView());
 
-        binding.getRoot().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.openUserDetails(user);
-            }
-        });
+        binding.getRoot().setOnClickListener(view -> mListener.openUserDetails(user));
         binding.email.setText(user.getEmail());
         binding.name.setText(user.getName());
         binding.info.setText(user.getCompany().getCatchPhrase());

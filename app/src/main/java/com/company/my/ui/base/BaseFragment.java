@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import javax.inject.Inject;
 
 import io.realm.Realm;
@@ -57,6 +59,7 @@ public abstract class BaseFragment<T extends IBasePresenter.Actions, E extends V
     @Override
     public void printError(Throwable throwable) {
         throwable.printStackTrace();
+        FirebaseCrash.report(throwable);
     }
 
     @Override
